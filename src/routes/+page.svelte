@@ -27,7 +27,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 50px;
-    background: url('esc.jpg') no-repeat center center/cover;
+    background: url('/esc.jpg') no-repeat center center/cover;
     min-height: 90vh;
 }
 .hero-overlay {
