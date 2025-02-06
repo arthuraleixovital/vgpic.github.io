@@ -8,11 +8,6 @@
         function isMobile() {
         return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     }
-
-    // Se for um dispositivo móvel, redireciona para uma versão desktop
-    if (isMobile()) {
-        window.location.href = "https://seusite.com/versao-desktop";
-    }
 </script>
 
 <style>
@@ -213,7 +208,7 @@
     <nav>
         <a href="#sobre">Sobre</a>
         <a href="#propostas">Propostas</a>
-        <a href="httpwww.google.com/cuzinho">Plano de Governo</a>
+        <a href="https://www.google.com">Plano de Governo</a>
         <a href="#contato">Contato</a>
     </nav>
 </div>
