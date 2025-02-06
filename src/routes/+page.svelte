@@ -113,7 +113,7 @@
         position: relative;
         width: 100%;
         height: 500px;
-        background: url('favicon.png') no-repeat center center/cover;
+        background: url('/favicon.png') no-repeat center center/cover;
         display: flex;
         align-items: center;
         justify-content: space-between;
