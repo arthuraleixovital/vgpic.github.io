@@ -295,18 +295,6 @@
         border-color: #0a58ca;
     }
 
-    .bg-dark {
-        background: linear-gradient(270deg, #ff0000, #ff9900, #ffff00, #00ff00, #0000ff, #8b00ff, #ff0000);
-        background-size: 400% 400%;
-        animation: gradientBG 10s ease infinite;
-    }
-
-    @keyframes gradientBG {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-
     .text-white {
         color: #fff !important;
     }
@@ -327,7 +315,7 @@
     <nav>
         <a href="#sobre">Sobre</a>
         <a href="#propostas">Propostas</a>
-        <a href="https://www.google.com">Plano de Governo</a>
+        <a href="https://drive.google.com/file/d/1WEIY6Y5wyKVVqOcza20QnI1krI7_EB62/view">Plano de Governo</a>
         <a href="#contato">Contato</a>
     </nav>
 </div>
