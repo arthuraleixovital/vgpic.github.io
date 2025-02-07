@@ -4,10 +4,22 @@
         { titulo: "Saúde", descricao: "Centros de saúde em bairros periféricos funcionando 24h, com atendimento médico, odontológico e psicológico gratuitos. Produção e distribuição pública de itens de higiene e saúde, como absorventes, fraldas e medicamentos básicos." },
         { titulo: "Segurança Pública", descricao: "Sistema comunitário de segurança, onde a própria população participa da organização e mediação de conflitos, reduzindo a necessidade de policiamento armado. Formação obrigatória para agentes de segurança com foco em direitos humanos, combate ao racismo e ao uso excessivo da força." }
     ];
-        // Verifica se o dispositivo é móvel
-        function isMobile() {
-        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    }
+
+    // Adiciona scroll suave para os links do menu
+    import { onMount } from 'svelte';
+
+    onMount(() => {
+        const anchors = document.querySelectorAll('a[href^="#"]');
+        anchors.forEach(anchor => {
+            anchor.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(anchor.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    });
 </script>
 
 <style>
@@ -15,11 +27,12 @@
         box-sizing: border-box;
         margin: 0;
         padding: 0;
+        font-family: 'Darker Grotesque', sans-serif;
     }
 
     :global(html, body) {
         width: 100vw;
-        overflow-x: hidden; /* Garante que nada cause rolagem lateral */
+        overflow-x: hidden;
     }
 
     .navbar {
@@ -36,6 +49,26 @@
         margin: 0 15px;
         text-decoration: none;
         font-weight: bold;
+        position: relative;
+        transition: color 0.3s ease;
+    }
+    .navbar a::after {
+        content: '';
+        position: absolute;
+        width: 0;
+        height: 2px;
+        background-color: #ff0000;
+        bottom: -5px;
+        left: 0;
+        transition: width 0.3s ease;
+    }
+
+    .navbar a:hover {
+        color: #ff0000;
+    }
+
+    .navbar a:hover::after {
+        width: 100%;
     }
 
     .hero {
@@ -45,8 +78,8 @@
         justify-content: space-between;
         padding: 50px;
         background: url('/esc.jpg') no-repeat center center/cover;
-        height: 90vh; /* Altura fixa */
-        max-height: 681px; /* Limite máximo */
+        height: 90vh;
+        max-height: 681px;
         overflow: hidden;
     }
 
@@ -66,6 +99,9 @@
         padding: 20px;
         border-radius: 10px;
         color: white;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 1s ease-out forwards;
     }
 
     .hero h1 {
@@ -85,13 +121,15 @@
         cursor: pointer;
         margin-top: 20px;
         border-radius: 20px;
+        animation: pulse 2s infinite;
     }
 
     .hero img {
-        position: absolute; /* Permite ajuste manual */
+        position: absolute;
         width: 40%;
-        bottom: -300px; /* Ajuste a altura da imagem */
-        left: 55%; /* Ajuste horizontal para mover a imagem */
+        bottom: -300px;
+        left: 55%;
+        animation: float 3s ease-in-out infinite;
     }
 
     .logo b {
@@ -107,6 +145,31 @@
         0% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
         100% { background-position: 0% 50%; }
+    }
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.05);
+        }
     }
 
     .sobre-container {
@@ -126,7 +189,10 @@
         color: white;
         padding: 20px;
         border-radius: 10px;
-        background-color: rgba(0, 0, 0, 0.6); /* Fundo semi-transparente para melhor legibilidade */
+        background-color: rgba(0, 0, 0, 0.6);
+        opacity: 0;
+        transform: translateX(-20px);
+        animation: fadeInLeft 1s ease-out forwards;
     }
 
     .sobre-imagem {
@@ -135,6 +201,23 @@
         bottom: 0px;
         left: 70%;
         height: auto;
+        opacity: 0;
+        transform: translateX(20px);
+        animation: fadeInRight 1s ease-out forwards;
+    }
+
+    @keyframes fadeInLeft {
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes fadeInRight {
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
     }
 
     .bg-light {
@@ -164,6 +247,27 @@
         background-clip: border-box;
         border: 1px solid rgba(0, 0, 0, 0.125);
         border-radius: 0.25rem;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.5s ease-out forwards;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .card:nth-child(1) {
+        animation-delay: 0.2s;
+    }
+
+    .card:nth-child(2) {
+        animation-delay: 0.4s;
+    }
+
+    .card:nth-child(3) {
+        animation-delay: 0.6s;
     }
 
     .card-body {
@@ -192,18 +296,33 @@
     }
 
     .bg-dark {
-        background-color: #212529 !important;
+        background: linear-gradient(270deg, #ff0000, #ff9900, #ffff00, #00ff00, #0000ff, #8b00ff, #ff0000);
+        background-size: 400% 400%;
+        animation: gradientBG 10s ease infinite;
+    }
+
+    @keyframes gradientBG {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
     }
 
     .text-white {
         color: #fff !important;
+    }
+
+    form {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 1s ease-out forwards;
+        animation-delay: 0.5s;
     }
 </style>
 
 <!-- Navbar -->
 <div class="navbar">
     <div class="logo">
-        <h2>Vinicius Goetten <b>48</b></h2>
+        <h2><b>Vinicius Goetten 48</b></h2>
     </div>
     <nav>
         <a href="#sobre">Sobre</a>
